@@ -85,14 +85,18 @@ def is_validated_english_sentence(user_input):
     """
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
-    data = user_input.split()
-    for i in data:
-        for j in i:
-            if 65<=ord(j)<=90 or 97<=ord(j)<=122:
-                continue
-            else:
-                return False
-    return True
+    data = get_cleaned_english_sentence(user_input)
+    data = data.split()
+    if data == []:
+        return False
+    else:
+        for i in data:
+            for j in i:
+                if 65<=ord(j)<=90 or 97<=ord(j)<=122:
+                    continue
+                else:
+                    return False
+        return True
     # ==================================
 
 
@@ -213,7 +217,7 @@ def encoding_character(english_character):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
     morse_code_dict = get_morse_code_dict()
-    return morse_code_dict[english_character]
+    return morse_code_dict[english_character.upper()]
     # ==================================
 
 
@@ -236,11 +240,16 @@ def decoding_sentence(morse_sentence):
     """
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
-    data = morse_sentence.split()
-    result = []
+    data = morse_sentence.split(" ")
+    result = ""
     for i in data:
-        result.append(decoding_character(i))
-    return "".join(result)
+        if i == "":
+            result+=" "
+        else:
+            result+=decoding_character(i)
+
+    return result.strip()
+
     # ==================================
 
 
@@ -305,3 +314,5 @@ def main():
     print("Good Bye")
     print("Morse Code Program Finished!!")
 
+if __name__ == "__main__":
+    main()
