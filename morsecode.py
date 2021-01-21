@@ -305,5 +305,3 @@ def main():
     print("Good Bye")
     print("Morse Code Program Finished!!")
 
-if __name__ == "__main__":
-    main()
